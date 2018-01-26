@@ -2,7 +2,8 @@ package coolStuff;
 
 import java.util.HashMap;
 import java.util.ArrayList;
-
+//The shortest path between a mouse and a cheese 
+//through a box with obstacles
 public class Homework2 
 {
 	static void createMap() 
