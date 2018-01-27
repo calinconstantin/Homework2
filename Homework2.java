@@ -1,4 +1,4 @@
-package coolStuff;
+package coolstuff;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -20,13 +20,13 @@ public class Homework2
 				Matrix.graph[i][j].distanceY = j;
 				Matrix.graph[i][j].Terrain = "o";
 				if (i <= 8)
-					Matrix.graph[i][j].neighbours.add(Matrix.graph[i + 1][j]);
+					Matrix.graph[i][j].neighbors.add(Matrix.graph[i + 1][j]);
 				if (i > 0)
-					Matrix.graph[i][j].neighbours.add(Matrix.graph[i - 1][j]);
+					Matrix.graph[i][j].neighbors.add(Matrix.graph[i - 1][j]);
 				if (j <=18)
-					Matrix.graph[i][j].neighbours.add(Matrix.graph[i][j + 1]);
+					Matrix.graph[i][j].neighbors.add(Matrix.graph[i][j + 1]);
 				if (j > 0)
-					Matrix.graph[i][j].neighbours.add(Matrix.graph[i][j - 1]);
+					Matrix.graph[i][j].neighbors.add(Matrix.graph[i][j - 1]);
 			}
 
 		int obstacles = (int) Math.floor(Math.random() * 100);
@@ -41,7 +41,7 @@ public class Homework2
 
 	static void shortestPath(int mouseX, int mouseY, int cheeseX, int cheeseY) 
 	{
-		// Exploring the neighbours nodes first before going to the next node 
+		// Exploring the neighbors nodes first before going to the next node 
 		// Add a distance score to each of them
 		HashMap<Node, Double> distanceScore = new HashMap<Node, Double>();
 		HashMap<Node, Node> previousNode = new HashMap<Node, Node>();
@@ -73,7 +73,7 @@ public class Homework2
 				break;
 
 			unvisited.remove(targetNode);
-			for (Node thisNode : targetNode.neighbours) 
+			for (Node thisNode : targetNode.neighbors) 
 			{
 				Double alt = (double) distanceScore.get(targetNode) + 1;
 				if (alt < distanceScore.get(thisNode)) {
@@ -115,7 +115,10 @@ public class Homework2
 					System.out.print("o ");
 					break;
 				case "|":
+					if((int) Math.floor(Math.random()*2) == 0)
 					System.out.print("| ");
+					else
+					System.out.print("_ ");
 					break;
 				}
 			}
@@ -132,7 +135,11 @@ public class Homework2
 		mouseY = (int) Math.floor(Math.random() * 19);				
 		cheeseX = (int) Math.floor(Math.random() * 9);		
 		cheeseY = (int) Math.floor(Math.random() * 19);
-		
+		while (mouseX == cheeseX && mouseY == cheeseX)
+		{
+			cheeseX = (int) Math.floor(Math.random() * 9);		
+			cheeseY = (int) Math.floor(Math.random() * 19);
+		}
 		
 		shortestPath(mouseX, mouseY, cheeseX, cheeseY);
 
@@ -145,6 +152,7 @@ public class Homework2
 		Matrix.graph[cheeseX][cheeseY].Terrain = "C";
 
 		printVisual();
+		
 	}
 
 }
